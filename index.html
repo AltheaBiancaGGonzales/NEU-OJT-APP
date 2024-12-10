@@ -1,126 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="register.js" defer type="module"></script>
-    <title>NEU OJT APP</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <!-- Login Page -->
-    <section id="login-page" class="page">
-        <div class="container">
-            <img src="./logo/logo.png" alt="NEU Logo" class="logo">
-            <h1>NEU OJT APP</h1>
-            <button id="googleSignInButton" class="google-signin">Sign in with Google</button>
-        </div>
-    </section>
+import { signInWithGoogle } from "./GoogleAuth.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import { auth } from "./GoogleAuth.js";
 
-    <!-- Main Page -->
-    <section id="main-page" class="page hidden">
-        <div class="container">
-            <img src="./logo/logo.png" alt="NEU Logo" class="logo">
-            <h2 id="userName">Welcome</h2>
-            <p id="userEmail"></p>
-            <img id="userProfilePicture" class="profile-pic" alt="User Profile Picture" />
-            <button id="nextPageButton" class="btn primary">Next Page</button>
-            <button id="logOutButton" class="btn secondary">Log Out</button>
-        </div>
-    </section>
+// Navigation function to switch between pages
+function navigateTo(pageId) {
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
 
-    <!-- Choices Page -->
-    <section id="choices-page" class="page hidden">
-        <div class="container">
-            <img src="./logo/logo.png" alt="NEU Logo" class="logo">
-            <div class="button-group">
-                <button class="btn primary" onclick="navigateTo('upload-requirements')">Upload Requirements</button>
-                <button class="btn primary" onclick="navigateTo('student-info')">Enter Student Info</button>
-                <button class="btn secondary" onclick="navigateTo('endorsement-letter')">Generate Endorsement Letter</button>
-            </div>
-        </div>
-    </section>
+    // Show the target page
+    const targetPage = document.getElementById(pageId);
+    if (targetPage) {
+        targetPage.classList.remove('hidden');
+    }
+}
 
-    <!-- Upload Requirements Page -->
-    <section id="upload-requirements" class="page hidden">
-        <div class="container">
-            <img src="./logo/logo.png" alt="NEU Logo" class="logo">
-            <h2>Upload Requirements</h2>
-            <form class="form" onsubmit="return false;">
-                <div class="upload-field">
-                    <label>Parent's Consent Form</label>
-                    <input type="file">
-                </div>
-                <div class="upload-field">
-                    <label>Medical Exam</label>
-                    <input type="file">
-                </div>
-                <div class="upload-field">
-                    <label>Psychological Exam</label>
-                    <input type="file">
-                </div>
-                <div class="upload-field">
-                    <label>Resume</label>
-                    <input type="file">
-                </div>
-                <button type="button" class="btn primary" onclick="navigateTo('main-page')">Submit</button>
-            </form>
-        </div>
-    </section>
+// Ensure that the Next Page button on the Main Page properly navigates to the Choices Page
+document.getElementById("nextPageButton").addEventListener("click", () => {
+    console.log("Navigating to choices-page");
+    navigateTo('choices-page');  // Navigates to the choices-page
+});
 
-    <!-- Student Info Page -->
-    <section id="student-info" class="page hidden">
-        <div class="container">
-            <img src="./logo/logo.png" alt="NEU Logo" class="logo">
-            <h2>Enter Student Info</h2>
-            <form class="form" onsubmit="return false;">
-                <div class="input-group">
-                    <label for="studentName">Name</label>
-                    <input type="text" id="studentName" placeholder="Enter your full name">
-                </div>
-                <div class="input-group">
-                    <label for="studentID">Student ID</label>
-                    <input type="text" id="studentID" placeholder="Enter your student ID">
-                </div>
-                <div class="input-group">
-                    <label for="course">Course</label>
-                    <input type="text" id="course" placeholder="Enter your course">
-                </div>
-                <button type="button" class="btn primary" onclick="navigateTo('main-page')">Submit</button>
-            </form>
-        </div>
-    </section>
+// Log out function
+function logout() {
+    auth.signOut().then(() => {
+        navigateTo('login-page');
+    }).catch((error) => {
+        console.error("Error during sign-out:", error);
+    });
+}
 
-    <!-- Endorsement Letter Page -->
-    <section id="endorsement-letter" class="page hidden">
-        <div class="container">
-            <img src="./logo/logo.png" alt="NEU Logo" class="logo">
-            <h2>Generate Endorsement Letter</h2>
-            <p>Here, you can generate the endorsement letter.</p>
-            <button class="btn primary" onclick="navigateTo('main-page')">Generate Letter</button>
-        </div>
-    </section>
+// Update user profile in UI
+function updateUserProfile(user) {
+    document.getElementById("userName").textContent = `Welcome, ${user.displayName}`;
+    document.getElementById("userEmail").textContent = user.email;
+    document.getElementById("userProfilePicture").src = user.photoURL || "./logo/default-profile.png";
+    navigateTo("main-page");
+}
 
-    <!-- Sign-In Options Page -->
-    <section id="sign-in-options" class="page hidden">
-        <div class="container">
-            <img src="./logo/logo.png" alt="NEU Logo" class="logo">
-            <h2>Sign In</h2>
-            <form onsubmit="return false;">
-                <div class="input-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="Enter your email">
-                </div>
-                <div class="input-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Enter your password">
-                </div>
-                <button type="button" class="btn primary" onclick="navigateTo('main-page')">Login</button>
-                <button type="button" class="btn secondary" onclick="navigateTo('login-page')">Cancel</button>
-            </form>
-        </div>
-    </section>
+// Handle Google sign-in
+document.getElementById("googleSignInButton").addEventListener("click", async () => {
+    const user = await signInWithGoogle();
 
-    <script src="scripts.js" type="module"></script>
-</body>
-</html>
+    if (user) {
+        updateUserProfile(user);
+    } else {
+        alert("Please use your institutional email (@neu.edu.ph) to sign in.");
+    }
+});
+
+// Monitor authentication state
+onAuthStateChanged(auth, (user) => {
+    if (user && user.email.endsWith("@neu.edu.ph")) {
+        updateUserProfile(user);
+    } else {
+        navigateTo("login-page");
+    }
+});
+
+// Show the main page initially when logged in
+document.addEventListener('DOMContentLoaded', function() {
+    navigateTo('main-page'); // Ensure the Main Page is shown by default
+});

@@ -15,4 +15,19 @@
   auth.languageCode = 'en'
   const  provider  = new GoogleAuthProvider();
 
-  const google-login = document.getElementId("google-signin")
+  const googleLogin = document.getElementId("google-signin");
+  googleLogin.addEventListener("click", function(){
+  signInWithPopup(auth, provider)
+  .then((result) => {
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const user = result.user;
+    console.log(user);
+    window.location.href = "logge";
+  }).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
+
+
+    
+  } )

@@ -121,6 +121,29 @@
         </div>
     </section>
 
+    <script>
+        // JavaScript to toggle visibility between pages
+        function navigateTo(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.add('hidden'));
+
+            // Show the selected page
+            const targetPage = document.getElementById(pageId);
+            targetPage.classList.remove('hidden');
+        }
+
+        // Add event listener to the "Next Page" button
+        document.getElementById('nextPageButton').addEventListener('click', function() {
+            navigateTo('choices-page'); // Navigate to Choices Page
+        });
+
+        // Show the main page initially when logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            navigateTo('main-page'); // Ensure the Main Page is shown by default
+        });
+    </script>
+
     <script src="scripts.js" type="module"></script>
 </body>
 </html>

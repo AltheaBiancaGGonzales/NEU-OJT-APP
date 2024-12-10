@@ -5,14 +5,18 @@ import { auth } from "./GoogleAuth.js";
 // Navigation function to switch between pages
 function navigateTo(pageId) {
     // Hide all pages
-    document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));  
+    document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
 
     // Show the target page
-    document.getElementById(pageId).classList.remove('hidden');  
+    const targetPage = document.getElementById(pageId);
+    if (targetPage) {
+        targetPage.classList.remove('hidden');
+    }
 }
 
 // Ensure that the Next Page button on the Main Page properly navigates to the Choices Page
 document.getElementById("nextPageButton").addEventListener("click", () => {
+    console.log("Navigating to choices-page");
     navigateTo('choices-page');  // Navigates to the choices-page
 });
 

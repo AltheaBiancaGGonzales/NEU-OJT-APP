@@ -14,21 +14,20 @@ const firebaseApp = initializeApp(firebaseConfig);
 const googleLogin = document.getElementById("google-signin");
 
 googleLogin.addEventListener("click", async () => {
-    const auth = getAuth(firebaseApp);
-    const provider = new GoogleAuthProvider();
+  const auth = getAuth(app); 
+  const provider = new GoogleAuthProvider();
 
-    try {
-        const result = await signInWithPopup(auth, provider);
-        const user = result.user;
-
-        console.log("Google Sign-In Successful", user);
-        
-        navigateTo('main-page');
-    } catch (error) {
-        console.error("Error signing in with Google:", error.message);
-        alert("Error: " + error.message);
-    }
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    console.log("Google Sign-In Successful", user);
+    navigateTo('main-page'); 
+  } catch (error) {
+    console.error("Error signing in with Google:", error.message);
+    alert("Error: " + error.message); 
+  }
 });
+
 
 function navigateTo(pageId) {
     document.querySelectorAll('.page').forEach(page => {

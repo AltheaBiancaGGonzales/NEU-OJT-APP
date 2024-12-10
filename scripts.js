@@ -2,12 +2,16 @@ import { signInWithGoogle } from "./GoogleAuth.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 import { auth } from "./GoogleAuth.js";
 
-// Navigation function
+// Navigation function to switch between pages
 function navigateTo(pageId) {
-    document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
-    document.getElementById(pageId).classList.remove('hidden');
+    document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));  // Hide all pages
+    document.getElementById(pageId).classList.remove('hidden');  // Show the target page
 }
 
+// Ensure that the Next Page button on the Main Page properly navigates to the Choices Page
+document.getElementById("nextPageButton").addEventListener("click", () => {
+    navigateTo('choices-page');  // Navigates to the choices-page
+});
 // Log out function
 function logout() {
     auth.signOut().then(() => {

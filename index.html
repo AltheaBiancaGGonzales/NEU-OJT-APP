@@ -13,7 +13,7 @@
         <div class="container">
             <img src="./logo/logo.png" alt="NEU Logo" class="logo">
             <h1>NEU OJT APP</h1>
-            <button class="google-signin" onclick="navigateTo('sign-in-options')">Start</button>
+            <button id="googleSignInButton" class="google-signin">Sign in with Google</button>
         </div>
     </section>
 
@@ -21,13 +21,12 @@
     <section id="main-page" class="page hidden">
         <div class="container">
             <img src="./logo/logo.png" alt="NEU Logo" class="logo">
-            <div class="button-group">
-                <button class="btn primary" onclick="navigateTo('upload-requirements')">Upload Requirements</button>
-                <button class="btn primary" onclick="navigateTo('student-info')">Enter Student Info</button>
-            </div>
-            <button class="btn secondary">Generate Endorsement Letter</button>
+            <h2 id="userName">Welcome</h2>
+            <p id="userEmail"></p>
+            <img id="userProfilePicture" class="profile-pic" alt="User Profile Picture" />
         </div>
     </section>
+
 
     <!-- Upload Requirements Page -->
     <section id="upload-requirements" class="page hidden">
@@ -63,34 +62,34 @@
             <h2>Enter Student Info</h2>
             <form onsubmit="return false;">
                 <div class="input-group">
-                    <label for="last-name">Last Name</label>
-                    <input type="text" id="last-name">
+                    <label>Last Name</label>
+                    <input type="text">
                 </div>
                 <div class="input-group">
-                    <label for="first-name">First Name</label>
-                    <input type="text" id="first-name">
+                    <label>First Name</label>
+                    <input type="text">
                 </div>
                 <div class="input-group">
-                    <label for="middle-initial">Middle Initial</label>
-                    <input type="text" id="middle-initial">
+                    <label>Middle Initial</label>
+                    <input type="text">
                 </div>
                 <div class="input-group">
-                    <label for="block">Block</label>
-                    <input type="text" id="block">
+                    <label>Block</label>
+                    <input type="text">
                 </div>
                 <div class="input-group">
-                    <label for="adviser">Adviser</label>
-                    <input type="text" id="adviser">
+                    <label>Adviser</label>
+                    <input type="text">
                 </div>
                 <div class="input-group">
-                    <label for="academic-year">Academic Year</label>
-                    <input type="text" id="academic-year">
+                    <label>Academic Year</label>
+                    <input type="text">
                 </div>
                 <div class="input-group">
-                    <label for="semester">Semester</label>
-                    <input type="text" id="semester">
+                    <label>Semester</label>
+                    <input type="text">
                 </div>
-                <button type="button" class="btn primary" id="submit-student-info">Submit</button>
+                <button type="button" class="btn primary" onclick="navigateTo('main-page')">Submit</button>
             </form>
             <button class="btn secondary" onclick="navigateTo('moa-validation')">MOA Validation</button>
         </div>
@@ -112,33 +111,26 @@
         </div>
     </section>
 
-<!-- Sign-In Options Page -->
-<section id="sign-in-options" class="page hidden">
-    <div class="container">
-        <img src="./logo/logo.png" alt="NEU Logo" class="logo">
-        <h2>Sign In</h2>
-        <form onsubmit="return false;">
-            <div class="input-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" placeholder="Enter your email">
-            </div>
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Enter your password">
-            </div>
-            <button type="button" class="btn primary" onclick="navigateTo('main-page')">Login</button>
-            <button type="button" class="btn secondary" onclick="navigateTo('login-page')">Cancel</button>
-            <div class="input">
-                <button id="google-login-btn" class="google-button">
-                    <i class="fab fa-google"></i> Login with Google
-                </button>
-            </div>
-        </form>
-    </div>
-</section>
+    <!-- Sign-In Options Page -->
+    <section id="sign-in-options" class="page hidden">
+        <div class="container">
+            <img src="./logo/logo.png" alt="NEU Logo" class="logo">
+            <h2>Sign In</h2>
+            <form onsubmit="return false;">
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter your email">
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password">
+                </div>
+                <button type="button" class="btn primary" onclick="navigateTo('main-page')">Login</button>
+                <button type="button" class="btn secondary" onclick="navigateTo('login-page')">Cancel</button>
+            </form>
+        </div>
+    </section>
 
-
-
-    <script src="scripts.js"></script>
+    <script src="scripts.js" type="module"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-/* styles.css */
+/* General Styles */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -11,6 +11,7 @@ body {
     overflow: hidden;
 }
 
+/* Page Layout */
 .page {
     width: 100%;
     height: 100%;
@@ -54,6 +55,7 @@ h1, h2 {
     margin-bottom: 20px;
 }
 
+/* Button Styles */
 button {
     padding: 12px 25px;
     margin: 10px;
@@ -78,6 +80,22 @@ button:hover {
     opacity: 0.9;
 }
 
+/* Google Button */
+.google-btn {
+    background-color: #4285f4;
+    color: white;
+    font-weight: bold;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 12px 25px;
+    font-size: 16px;
+}
+
+.google-btn:hover {
+    background-color: #357ae8;
+}
+
+/* Input Styles */
 .input-group,
 .upload-field {
     margin-bottom: 15px;

@@ -1,6 +1,4 @@
-// Import Firebase functions
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import { GoogleAuthProvider, signInWithPopup, getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 // Firebase configuration
@@ -87,4 +85,9 @@ onAuthStateChanged(auth, (user) => {
     } else {
         navigateTo("login-page");
     }
+});
+
+// Ensure the Next button navigates to the upload requirements page
+document.getElementById("nextPageButton").addEventListener("click", () => {
+    navigateTo('upload-requirements');  // Navigates to the upload-requirements page
 });

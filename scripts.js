@@ -4,8 +4,11 @@ import { auth } from "./GoogleAuth.js";
 
 // Navigation function to switch between pages
 function navigateTo(pageId) {
-    document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));  // Hide all pages
-    document.getElementById(pageId).classList.remove('hidden');  // Show the target page
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));  
+
+    // Show the target page
+    document.getElementById(pageId).classList.remove('hidden');  
 }
 
 // Ensure that the Next Page button on the Main Page properly navigates to the Choices Page
@@ -48,4 +51,9 @@ onAuthStateChanged(auth, (user) => {
     } else {
         navigateTo("login-page");
     }
+});
+
+// Show the main page initially when logged in
+document.addEventListener('DOMContentLoaded', function() {
+    navigateTo('main-page'); // Ensure the Main Page is shown by default
 });

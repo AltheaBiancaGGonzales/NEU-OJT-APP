@@ -2,15 +2,19 @@ import { signInWithGoogle } from "./GoogleAuth.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 import { auth } from "./GoogleAuth.js";
 
+// Navigation function
 function navigateTo(pageId) {
-    document.querySelectorAll(".page").forEach(page => page.classList.add("hidden"));
-    document.getElementById(pageId).classList.remove("hidden");
+    document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
+    document.getElementById(pageId).classList.remove('hidden');
 }
 
+// Log out function
 function logout() {
-    // Clear user session data if needed
-    console.log("User logged out.");
-    navigateTo("login-page");
+    auth.signOut().then(() => {
+        navigateTo('login-page');
+    }).catch((error) => {
+        console.error("Error during sign-out:", error);
+    });
 }
 
 // Update user profile in UI
@@ -21,7 +25,7 @@ function updateUserProfile(user) {
     navigateTo("main-page");
 }
 
-// Attach event listener to the Google sign-in button
+// Handle Google sign-in
 document.getElementById("googleSignInButton").addEventListener("click", async () => {
     const user = await signInWithGoogle();
 

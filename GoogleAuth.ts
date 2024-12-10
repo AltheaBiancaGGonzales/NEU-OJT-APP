@@ -1,4 +1,4 @@
-import { GoogleAuthProvider, signInWithPopup, getAuth } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import { GoogleAuthProvider, signInWithPopup, getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 
@@ -9,7 +9,7 @@ const firebaseConfig = {
     projectId: "out-of-bounds-ojt-app",
     storageBucket: "out-of-bounds-ojt-app.appspot.com",
     messagingSenderId: "1059978490785",
-    appId: "1:1059978490785:web:d08f9e40b5b0e58efed1e0",
+    appId: "1:1059978490785:web:d08f9e40b5b0e58efed1e0"
 };
 
 // Initialize Firebase
@@ -20,39 +20,36 @@ const provider = new GoogleAuthProvider();
 
 // Function to check if email is institutional
 function isInstitutionalEmail(email: string | null): boolean {
-    if (!email) return false;
-    const univDomain = /@neu\.edu\.ph$/;
-    return univDomain.test(email);
+    return email?.endsWith("@neu.edu.ph") ?? false;
 }
 
-// Function to handle Google sign-in
-export const signInWithGoogle = async () => {
+// Function to sign in with Google
+export async function signInWithGoogle(): Promise<any> {
     try {
         const result = await signInWithPopup(auth, provider);
         const user = result.user;
 
-        if (isInstitutionalEmail(user.email)) {
+        if (user && isInstitutionalEmail(user.email)) {
             const userRef = doc(db, "users", user.uid);
-            const userDoc = await getDoc(userRef);
+            const docSnap = await getDoc(userRef);
 
-            if (!userDoc.exists()) {
+            if (!docSnap.exists()) {
                 await setDoc(userRef, {
                     displayName: user.displayName,
-                    institutional_email: user.email,
-                    photoUrl: user.photoURL,
-                    createdAt: new Date(),
-                    role: "Student",
+                    email: user.email,
+                    photoURL: user.photoURL,
+                    uid: user.uid
                 });
             }
             return user;
         } else {
-            console.log("Not an institutional email");
+            alert("Please sign in with your institutional email.");
             return null;
         }
     } catch (error) {
-        console.error("Error during sign-in", error);
+        console.error("Error during Google sign-in:", error);
         return null;
     }
-};
+}
 
-export { auth, db };
+export { auth, signOut, onAuthStateChanged };

@@ -14,3 +14,5 @@
   const auth = getAuth(app);
   auth.languageCode = 'en'
   const  provider  = new GoogleAuthProvider();
+
+  const google-login = document.getElementId("google-signin")

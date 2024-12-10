@@ -12,6 +12,7 @@ function navigateTo(pageId) {
 document.getElementById("nextPageButton").addEventListener("click", () => {
     navigateTo('choices-page');  // Navigates to the choices-page
 });
+
 // Log out function
 function logout() {
     auth.signOut().then(() => {

@@ -24,8 +24,21 @@
             <h2 id="userName">Welcome</h2>
             <p id="userEmail"></p>
             <img id="userProfilePicture" class="profile-pic" alt="User Profile Picture" />
-            <button id="nextPageButton" class="btn primary" onclick="navigateTo('upload-requirements')">Next Page</button> <!-- Updated navigation -->
+            <!-- Updated navigation to lead to choices-page -->
+            <button id="nextPageButton" class="btn primary" onclick="navigateTo('choices-page')">Next Page</button>
             <button id="logOutButton" class="btn secondary" onclick="logout()">Log Out</button>
+        </div>
+    </section>
+
+    <!-- Choices Page -->
+    <section id="choices-page" class="page hidden">
+        <div class="container">
+            <img src="./logo/logo.png" alt="NEU Logo" class="logo">
+            <div class="button-group">
+                <button class="btn primary" onclick="navigateTo('upload-requirements')">Upload Requirements</button>
+                <button class="btn primary" onclick="navigateTo('student-info')">Enter Student Info</button>
+            </div>
+            <button class="btn secondary">Generate Endorsement Letter</button>
         </div>
     </section>
 
@@ -50,6 +63,29 @@
                 <div class="upload-field">
                     <label>Resume</label>
                     <input type="file">
+                </div>
+                <button type="button" class="btn primary" onclick="navigateTo('main-page')">Submit</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Student Info Page -->
+    <section id="student-info" class="page hidden">
+        <div class="container">
+            <img src="./logo/logo.png" alt="NEU Logo" class="logo">
+            <h2>Enter Student Info</h2>
+            <form class="form" onsubmit="return false;">
+                <div class="input-group">
+                    <label for="studentName">Name</label>
+                    <input type="text" id="studentName" placeholder="Enter your full name">
+                </div>
+                <div class="input-group">
+                    <label for="studentID">Student ID</label>
+                    <input type="text" id="studentID" placeholder="Enter your student ID">
+                </div>
+                <div class="input-group">
+                    <label for="course">Course</label>
+                    <input type="text" id="course" placeholder="Enter your course">
                 </div>
                 <button type="button" class="btn primary" onclick="navigateTo('main-page')">Submit</button>
             </form>

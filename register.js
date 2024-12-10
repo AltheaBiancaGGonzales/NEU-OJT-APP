@@ -1,6 +1,6 @@
 // Import Firebase functions
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 // Firebase configuration
@@ -36,7 +36,7 @@ function updateUserProfile(user) {
     document.getElementById("userName").textContent = `Welcome, ${user.displayName}`;
     document.getElementById("userEmail").textContent = user.email;
     document.getElementById("userProfilePicture").src = user.photoURL || "./logo/default-profile.png";
-    navigateTo("main-page");
+    navigateTo("main-page");  // Navigate to the main page after updating the profile
 }
 
 // Handle Google sign-in
@@ -62,10 +62,21 @@ document.getElementById("googleSignInButton").addEventListener("click", async ()
             updateUserProfile(user);
         } else {
             alert("Please use your institutional email (@neu.edu.ph) to sign in.");
-            auth.signOut();
+            await signOut(auth);  // Log the user out if the email is invalid
         }
     } catch (error) {
         console.error("Error during sign-in:", error);
+    }
+});
+
+// Log out function
+document.getElementById("logOutButton").addEventListener("click", async () => {
+    try {
+        await signOut(auth);
+        navigateTo("login-page");  // Redirect to the login page after log-out
+        alert("You have successfully logged out.");
+    } catch (error) {
+        console.error("Error during log-out:", error);
     }
 });
 

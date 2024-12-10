@@ -24,19 +24,10 @@
             <h2 id="userName">Welcome</h2>
             <p id="userEmail"></p>
             <img id="userProfilePicture" class="profile-pic" alt="User Profile Picture" />
-            <button id="nextPageButton" class="btn primary" onclick="navigateTo('next-page')">Next Page</button>
+            <button id="nextPageButton" class="btn primary" onclick="navigateTo('upload-requirements')">Next Page</button> <!-- Updated navigation -->
             <button id="logOutButton" class="btn secondary" onclick="logout()">Log Out</button>
         </div>
     </section>
-
-    <!-- Next Page (example placeholder) -->
-    <section id="next-page" class="page hidden">
-        <div class="container">
-            <h2>Next Page</h2>
-            <button class="btn secondary" onclick="navigateTo('main-page')">Back to Main</button>
-        </div>
-    </section>
-
 
     <!-- Upload Requirements Page -->
     <section id="upload-requirements" class="page hidden">
@@ -61,62 +52,6 @@
                     <input type="file">
                 </div>
                 <button type="button" class="btn primary" onclick="navigateTo('main-page')">Submit</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Enter Student Info Page -->
-    <section id="student-info" class="page hidden">
-        <div class="container scrollable">
-            <img src="./logo/logo.png" alt="NEU Logo" class="logo">
-            <h2>Enter Student Info</h2>
-            <form onsubmit="return false;">
-                <div class="input-group">
-                    <label>Last Name</label>
-                    <input type="text">
-                </div>
-                <div class="input-group">
-                    <label>First Name</label>
-                    <input type="text">
-                </div>
-                <div class="input-group">
-                    <label>Middle Initial</label>
-                    <input type="text">
-                </div>
-                <div class="input-group">
-                    <label>Block</label>
-                    <input type="text">
-                </div>
-                <div class="input-group">
-                    <label>Adviser</label>
-                    <input type="text">
-                </div>
-                <div class="input-group">
-                    <label>Academic Year</label>
-                    <input type="text">
-                </div>
-                <div class="input-group">
-                    <label>Semester</label>
-                    <input type="text">
-                </div>
-                <button type="button" class="btn primary" onclick="navigateTo('main-page')">Submit</button>
-            </form>
-            <button class="btn secondary" onclick="navigateTo('moa-validation')">MOA Validation</button>
-        </div>
-    </section>
-
-    <!-- MOA Validation Page -->
-    <section id="moa-validation" class="page hidden">
-        <div class="container">
-            <img src="./logo/logo.png" alt="NEU Logo" class="logo">
-            <h2>MOA Validation</h2>
-            <form onsubmit="return false;">
-                <div class="input-group">
-                    <label for="company-name">Enter Company Name:</label>
-                    <input type="text" id="company-name" placeholder="Enter company name">
-                </div>
-                <button type="button" class="btn primary">Validate</button>
-                <button type="button" class="btn secondary" onclick="navigateTo('student-info')">Back</button>
             </form>
         </div>
     </section>

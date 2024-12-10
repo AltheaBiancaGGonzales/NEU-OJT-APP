@@ -22,6 +22,7 @@
     const user = result.user;
     console.log(user);
     window.location.href = "../logged.html";
+    
   }).catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;

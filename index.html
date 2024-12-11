@@ -3,9 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="register.js" defer type="module"></script>
     <title>NEU OJT APP</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer type="module"></script>
+    <style>
+        #choices-page .centered {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            flex-direction: column;
+        }
+
+        .logout-btn {
+            margin-top: 10px;
+        }
+
+        .back-btn {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <!-- Login Page -->
@@ -33,46 +50,10 @@
     <section id="choices-page" class="page hidden">
         <div class="container">
             <img src="./logo/logo.png" alt="NEU Logo" class="logo">
+            <h2>Choices</h2>
             <div class="button-group">
-                <button class="btn primary" onclick="navigateTo('student-info')">Enter Student Info</button>
-                <button class="btn secondary" onclick="navigateTo('endorsement-letter')">Generate Endorsement Letter</button>
+                <button id="uploadRequirementsButton" class="btn primary">Upload Requirements</button>
+                <button id="enterStudentInfoButton" class="btn primary">Enter Student Info</button>
             </div>
-        </div>
-    </section>
-
-    <!-- Student Info Page -->
-    <section id="student-info" class="page hidden">
-        <div class="container">
-            <img src="./logo/logo.png" alt="NEU Logo" class="logo">
-            <h2>Enter Student Info</h2>
-            <form class="form" onsubmit="return false;">
-                <div class="input-group">
-                    <label for="studentName">Name</label>
-                    <input type="text" id="studentName" placeholder="Enter your full name">
-                </div>
-                <div class="input-group">
-                    <label for="studentID">Student ID</label>
-                    <input type="text" id="studentID" placeholder="Enter your student ID">
-                </div>
-                <div class="input-group">
-                    <label for="course">Course</label>
-                    <input type="text" id="course" placeholder="Enter your course">
-                </div>
-                <button type="button" class="btn primary" onclick="navigateTo('main-page')">Submit</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Endorsement Letter Page -->
-    <section id="endorsement-letter" class="page hidden">
-        <div class="container">
-            <img src="./logo/logo.png" alt="NEU Logo" class="logo">
-            <h2>Generate Endorsement Letter</h2>
-            <p>Here, you can generate the endorsement letter.</p>
-            <button class="btn primary" onclick="navigateTo('main-page')">Generate Letter</button>
-        </div>
-    </section>
-
-    <script src="scripts.js" type="module"></script>
-</body>
-</html>
+            <div class="centered">
+                <button id="generateEndorsementButton" class="btn secondary">Generate Endorsement Letter</button
